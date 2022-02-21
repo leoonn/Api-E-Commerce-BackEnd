@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29403.142
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Login-Backend", "Login-Backend\Login-Backend.csproj", "{0CA39BC8-3649-4D44-BFBD-5BE281C079C3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{723574E1-1687-4C2F-B2D5-AEC4B548A6CA}"
+	ProjectSection(SolutionItems) = preProject
+		Env.env = Env.env
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0CA39BC8-3649-4D44-BFBD-5BE281C079C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CA39BC8-3649-4D44-BFBD-5BE281C079C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CA39BC8-3649-4D44-BFBD-5BE281C079C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CA39BC8-3649-4D44-BFBD-5BE281C079C3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7B7CEF21-EF05-402C-B0E3-7E3C6EFB3022}
+	EndGlobalSection
+EndGlobal

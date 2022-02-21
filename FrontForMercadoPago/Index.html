@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>Título da página</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="stylesheet.css" media="screen" />
+
+</head>
+
+<body>
+    <!-- Step #2 -->
+   <div class="center">
+    <form class="box" id="form-checkout">
+        <label >Card Number</label>
+        <input type="text" name="cardNumber" id="form-checkout__cardNumber" />
+        <label >cardExpirationDate</label>
+        <input type="text" name="cardExpirationDate" id="form-checkout__cardExpirationDate" />
+        <label >cardholderName</label>
+        <input type="text" name="cardholderName" id="form-checkout__cardholderName" />
+        <label >cardholderEmail</label>
+        <input type="email" name="cardholderEmail" id="form-checkout__cardholderEmail" />
+        <label >securityCode</label>
+        <input type="text" name="securityCode" id="form-checkout__securityCode" />
+        <label >issuer</label>
+        <select name="issuer" id="form-checkout__issuer"></select>
+        <label >identificationType</label>
+        <select name="identificationType" id="form-checkout__identificationType"></select>
+        <label >identificationNumber</label>
+        <input type="text" name="identificationNumber" id="form-checkout__identificationNumber" />
+        <label >installments</label>
+        <select name="installments" id="form-checkout__installments"></select>
+        <button class="pay" type="submit" id="form-checkout__submit">Pay</button>
+        <progress value="0" class="progress-bar">Loading...</progress>
+    </form>
+</div> 
+
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+    <script>
+        const mp = new MercadoPago('TEST-13451adc-a52d-4243-8391-f730e2d02908');
+        // Add step #3
+        // Step #3
+const cardForm = mp.cardForm({
+  amount: "100.5",
+  autoMount: true,
+  form: {
+    id: "form-checkout",
+    cardholderName: {
+      id: "form-checkout__cardholderName",
+      placeholder: "Card Holder",
+    },
+    cardholderEmail: {
+      id: "form-checkout__cardholderEmail",
+      placeholder: "E-mail",
+    },
+    cardNumber: {
+      id: "form-checkout__cardNumber",
+      placeholder: "Card Number",
+    },
+    cardExpirationDate: {
+      id: "form-checkout__cardExpirationDate",
+      placeholder: "Expiration date (MM/YYYY)",
+    },
+    securityCode: {
+      id: "form-checkout__securityCode",
+      placeholder: "CVV",
+    },
+    installments: {
+      id: "form-checkout__installments",
+      placeholder: "Installments",
+    },
+    identificationType: {
+      id: "form-checkout__identificationType",
+      placeholder: "Document Type",
+    },
+    identificationNumber: {
+      id: "form-checkout__identificationNumber",
+      placeholder: "Document Number",
+    },
+    issuer: {
+      id: "form-checkout__issuer",
+      placeholder: "Issuer",
+    },
+  },
+  callbacks: {
+    onFormMounted: error => {
+      if (error) return console.warn("Form Mounted handling error: ", error);
+      console.log("Form mounted");
+    },
+    onSubmit: event => {
+      event.preventDefault();
+
+      const {
+        paymentMethodId: payment_method_id,
+        issuerId: issuer_id,
+        cardholderEmail: e_mail,
+        amount,
+        token,
+        installments,
+        identificationNumber,
+        identificationType,
+      } = cardForm.getCardFormData();
+
+      fetch("Index.html", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          token,
+          issuer_id,
+          payment_method_id,
+          transaction_amount: Number(amount),
+          installments: Number(installments),
+          description: "Product description",
+          payer: {
+            e_mail,
+            identification: {
+              type: identificationType,
+              number: identificationNumber,
+            },
+          },
+        }),
+      });
+    },
+    onFetching: (resource) => {
+      console.log("Fetching resource: ", resource);
+
+      // Animate progress bar
+      const progressBar = document.querySelector(".progress-bar");
+      progressBar.removeAttribute("value");
+
+      return () => {
+        progressBar.setAttribute("value", "0");
+      };
+    }
+  },
+});
+    </script>
+</body>
+
+</html

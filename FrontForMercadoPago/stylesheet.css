@@ -1,0 +1,19 @@
+.box {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+
+.center{
+    margin-top: 300px;
+    display: flex;
+    justify-content: center;
+}
+.pay{
+    margin-top: 10px;
+    width: 100px;
+    height: 35px;
+    align-self: center;
+    background-color: rgb(60, 224, 202);
+}
