@@ -38,6 +38,7 @@ namespace Login_Backend.Controllers
             if (Logged)
             {
                 ShoppingCartViewModel cartVM = await _service.GetTotalPayment(userId);
+                //Acess Token API Mercado Pago
                 MercadoPagoConfig.AccessToken = Environment.GetEnvironmentVariable("SECRET_KEY");
                 var request = new PaymentCreateRequest
                 {
